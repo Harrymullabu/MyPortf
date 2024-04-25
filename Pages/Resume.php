@@ -6,7 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="../style.css">
     <a href="img/Harry.pdf" download="Resume.pdf">Download Resume</a>
-    <a href="download_pdf.php">Download PDF</a>
+   
 </head>
 <body>
     <?php
