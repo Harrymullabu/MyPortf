@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: white;
+    color: white;
+}
+
+.hero {
+    width: 100%;
+    
+    background-color: rgb(64, 0, 94);
+    background-size:cover;
+    background-position: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding:30px;
+    padding-left:8%;
+    padding-right:8%;
+}
+.logo{
+    color:white;
+    font-size:35px;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+span{
+    color:#f9004d;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 15px;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    
+}
+
+.btn{
+    background-color:#ff004f;
+    color:white;
+    text-decoration:none;
+    border:2px solid transparent;
+    font-weight:bold;
+    padding:10px 25px;
+    border-radius:15px;
+    transition: transform .4s;
+
+}
+.content{
+    
+}
+h1{
+    color:black;
+    
+}
+
+
+h3{
+    color:white;
+
+    
+    
+}
+
+    
+.newslatter form{
+    width:500px;
+    max-width:100%;
+    position:relative;
+    
+}
+.newslatter form input{
+    display:inline-block;
+    width:100%;
+    padding:14px 130px 14px 15px;
+    border:2px solid #f9004d;
+    outline:none;
+    border-radius:50px;
+
+}
+.About{
+    width: 100%;
+    padding:100px 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.main{
+    width:1130px;
+    max-width:95%;
+    margin:0 auto;
+    display: flex;
+    align-items: left;
+    justify-content: space-around;
+}
+
+.aboutImg {
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.aboutImg Img {
+    width: 65%;
+}
+.About-text h2{
+    color: white;
+    font-size: 73px;
+    text-transform:capitalize;
+    margin-bottom:20px;
+    justify-content: space-between;
+    
+}
+ .container {
+    display: block;
+    margin-top: 20px !important;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    background-color:#f9004d;
+    filter: drop-shadow(6px 10px 0.5rem black);
+    transition: all .5s;
+ }
+
+ .container:hover {
+    transition: all .5s;
+    filter: drop-shadow(8px 12px 0.8rem black);
+
+ }
+.form-group {
+        margin-bottom: 20px;
+ }
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+ }
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+.help-block {
+    color: red;
+}
+.btn-primary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #312267;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    }
+
+
+    
+    .job-container {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .job-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .job-date {
+        font-style: italic;
+        color: #555;
+    }
+    .job-description {
+        margin-top: 10px;
+    }
+
+
+.loginWrapper {
+    width: 50%;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    background-color: #f9004d;
+    padding : 10px;
+    border-radius:10px;
+    border: 5px solid #ccc;
+    filter: drop-shadow(6px 10px 0.5rem white);
+    transition: all .5s;
+}

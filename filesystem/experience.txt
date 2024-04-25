@@ -1,0 +1,16 @@
+<b> My Experience<b>
+
+<b>Bemidji State University Digital Cop.<b>
+Title: Web Content Creator 
+Start Date: Feb 2020
+End Date: August 2021
+Description: Wordpress.Collaborated with team members to brainstorm and implement creative solutions to complex problems.
+
+
+<b>SanfordHealth Bemidji<b>
+Title: (Intern)Technology Specialist
+Start Date: January 2024
+End Date: Present
+Description: Helped various clients using WordPress, HTML, CSS,
+Communicated with clients to understand their requirements and provide regular updates on project progress.
+Provided ongoing maintenance and support for Hardwareand software.

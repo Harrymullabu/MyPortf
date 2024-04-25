@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #080808;
+    color: #fff;
+    background-image: url(../img/background.webp);
+    background-size:cover;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.hero {
+    width: 100%;
+}
+    
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding:30px;
+    padding-left:8%;
+    padding-right:8%;
+}
+.logo{
+    color:white;
+    font-size:35px;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+span{
+    color:#f9004d;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 15px;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    
+}
+
+.btn{
+    background-color:#ff004f;
+    color:white;
+    text-decoration:none;
+    border:2px solid transparent;
+    font-weight:bold;
+    padding:10px 25px;
+    border-radius:15px;
+    transition: transform .4s;
+
+}
+.content{
+    position:absolute;
+    top:50%;
+    left:8%;
+    transform:translate(-50%);
+}
+h1{
+    color:white;
+    font-size:20px 0px 20px;
+    margin-bottom:5px;
+}
+
+
+h3{
+    color:white;
+    font-size:25px;
+    margin-bottom:50px;
+}
+h4{
+    color:#fcfc;
+    letter-spacing:2px;
+    font-size:20px;
+}
+.newslatter form{
+    width:380px;
+    max-width:100%;
+    position:relative;
+}
+.newslatter form input{
+    display:inline-block;
+    width:100%;
+    padding:14px 130px 14px 15px;
+    border:2px solid #f9004d;
+    outline:none;
+    border-radius:30px;
+
+}
+.About{
+    width: 100%;
+    padding:100px 0px;
+    background-color: #191919;
+
+}
+
+About img{
+    height: auto;
+    width: 430px;
+}
+.About-text{
+    width:550px;
+}
+.main{
+    width:1130px;
+    max-width:95%;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.About-text h2{
+    color: white;
+    font-size: 73px;
+    text-transform:capitalize;
+    margin-bottom:0px;
+    
+}
