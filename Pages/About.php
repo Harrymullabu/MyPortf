@@ -14,6 +14,7 @@
 
     <?php
     include '../nav.php';
+    //include '/var/www/html/ma1693kn/MyPortf'
     ?>
 
     <section class="About">
