@@ -1,70 +1,33 @@
 <?php
 session_start();
+$app = ''; // Define the $app variable with the correct path to the directory where 'nav.php' is located
+//include $app . '/nav.php';
 
-// Include the navigation bar file
-//include_once 'nav.php';
+if(isset($_POST['login'])) {
+    $username = 'admin';
+    $password = 'password';
 
-// Establish a database connection
-$mysqli = new mysqli("localhost", "username", "password", "database_name");
-
-
-// Check connection
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-
-$username = $password = "";
-$username_err = $password_err = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter username.";
+    if($_POST['username'] == $username && $_POST['password'] == $password) {
+        $_SESSION['admin'] = true;
+        header('Location: dashboard.php');
+        exit;
     } else {
-        $username = trim($_POST["username"]);
+        $error = 'Invalid username or password';
     }
-
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter your password.";
-    } else {
-        $password = trim($_POST["password"]);
-    }
-
-    if (empty($username_err) && empty($password_err)) {
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-
-        if ($stmt = $mysqli->prepare($sql)) {
-            $stmt->bind_param("s", $param_username);
-
-            $param_username = $username;
-
-            if ($stmt->execute()) {
-                $stmt->store_result();
-
-                if ($stmt->num_rows == 1) {
-                    $stmt->bind_result($id, $username, $hashed_password);
-                    if ($stmt->fetch()) {
-                        if (password_verify($password, $hashed_password)) {
-                            session_start();
-
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;
-
-                            header("location: login.php");
-                        } else {
-                            $password_err = "The password you entered was not valid.";
-                        }
-                    }
-                } else {
-                    $username_err = "No account found with that username.";
-                }
-            } else {
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-            $stmt->close();
-        }
-    }
-    $mysqli->close();
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
+    <h2>Admin Login</h2>
+    <?php if(isset($error)) echo "<p>$error</p>"; ?>
+    <form method="post">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="submit" name="login" value="Login">
+    </form>
+</body>
+</html>

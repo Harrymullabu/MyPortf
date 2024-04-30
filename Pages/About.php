@@ -1,10 +1,20 @@
+<?php
+$con = parse_ini_file("../config.ini", true);
+$env = $con['ENVIRONMENT'];
+$url = $con[$env]['URL_ROOT'];
+$app = $con[$env]['APP_ROOT'];
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href=<?= $url . "/style.css"?>>
 
     <title>Portfolio</title>
 
@@ -13,8 +23,8 @@
 <body>
 
     <?php
-    include '../nav.php';
-    //include '/var/www/html/ma1693kn/MyPortf'
+   include $app . '/nav.php';
+    
     ?>
 
     <section class="About">

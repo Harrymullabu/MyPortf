@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <?php include '../nav.php'; ?>
+    <?php     include $app . '/nav.php';
+?>
 
     <div class="container">
         <h2>Projects</h2>

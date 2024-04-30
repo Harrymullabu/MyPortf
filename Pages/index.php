@@ -1,3 +1,10 @@
+<?php
+$con = parse_ini_file("config.ini", true);
+$env = $con['ENVIRONMENT'];
+$url = $con[$env]['URL_ROOT'];
+$app = $con[$env]['APP_ROOT'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,16 +12,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio website</title>
-    <link rel="stylesheet" href="indexStyle.css">
+    <link rel="stylesheet" href="<?= $url . "/indexStyle.css" ?>">
+   
     <style>
         body {
             background-color: #f0f0f0;
-            color: whitepurple;  
+            color: whitepurple;
             font-family: Arial, sans-serif;
             text-align: center;
             padding-top: 50px;
-    
-            
+
+
         }
 
         .contact-info {
@@ -48,7 +56,7 @@
 
     <?php
     // This PHP code includes the navigation bar
-    include 'nav.php';
+    include $app . '/nav.php';
     ?>
 
 

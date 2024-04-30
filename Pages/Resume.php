@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Resume</title>
     <link rel="stylesheet" href="../style.css">
-    <a href="img/Harry.pdf" download="Resume.pdf">Download Resume</a>
-   
 </head>
 <body>
     <?php
@@ -14,11 +12,9 @@
     include '../nav.php';
     ?>
     <section class="Resume">
-        <div class="ResumeImg">
-            <img src="../img/Harry.pdf" alt="Harry">
-            
+        <div class="ResumePDF">
+            <embed src="img/Harry.pdf" type="application/pdf" width="100%" height="600px" />
         </div>
-        </form>
-    </div>
+    </section>
 </body>
-</html>
+</html> -->

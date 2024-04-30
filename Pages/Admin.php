@@ -1,26 +1,31 @@
 <?php
 session_start();
+$con = parse_ini_file("../config.ini", true);
+$env = $con['ENVIRONMENT'];
+$url = $con[$env]['URL_ROOT'];
+$app = $con[$env]['APP_ROOT'];
 
 // Check if user is logged in, if not redirect to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php");
+    header("location: {$url}login.php"); // Remove unnecessary concatenation and spaces here
     exit;
 }
 
 // Include necessary files
-
-// Process form submissions if any
+include $app . '/nav.php';
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your stylesheet -->
+    <link rel="stylesheet" href="<?= $url . "styles.css"?>"> <!-- Include your stylesheet -->
 </head>
+
 <body>
 
     <div class="container">
@@ -58,4 +63,5 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
 
 </body>
+
 </html>

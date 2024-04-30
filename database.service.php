@@ -59,12 +59,10 @@ class DatabaseService{
     }
 
     public function submit_post($data){
-       //this is wehre you would do the queries to insert a post to the database
        $this->_posts[] = $data;
     }
 
     public function edit_post($data){
-        //this is where you would do the queries to edit a post in your database
         $index = $this->_get_post_index_by_id($data['id']);
         $this->_posts[$index] = $data;
     }

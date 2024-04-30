@@ -11,11 +11,10 @@ class Project_Controller
 
     public function render()
     {
-        foreach ($this->_db["Projects"] as $projectData) 
+        foreach ($this->_db["rojects"] as $projectData) 
         {
             $project = new ProjectModel($projectData); 
             include_once( 'pages/project.php');
         }
     }
 }
-?>

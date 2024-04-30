@@ -4,7 +4,6 @@ class ProjectModel
     private $_title;
     private $_lang;
     private $_link;
-    private $_img;
     private $_desc;
 
     public function __construct($project)
@@ -34,4 +33,3 @@ class ProjectModel
         return $this->_lang;
     }
 }
-?>

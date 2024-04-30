@@ -1,53 +1,61 @@
 <?php
-    $name = $email = $message = "";
-    $name_err = $email_err = $message_err = "";
+$con = parse_ini_file("../config.ini", true);
+$env = $con['ENVIRONMENT'];
+$url = $con[$env]['URL_ROOT'];
+$app = $con[$env]['APP_ROOT'];
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if (empty(trim($_POST["name"]))) {
-            $name_err = "Please enter your name.";
-        } else {
-            $name = trim($_POST["name"]);
-        }
+$name = $email = $message = "";
+$name_err = $email_err = $message_err = "";
 
-        if (empty(trim($_POST["email"]))) {
-            $email_err = "Please enter your email address.";
-        } else {
-            $email = trim($_POST["email"]);
-        }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if (empty(trim($_POST["message"]))) {
-            $message_err = "Please enter your message.";
-        } else {
-            $message = trim($_POST["message"]);
-        }
-
-        if (empty($name_err) && empty($email_err) && empty($message_err)) {
-
-            $to = "hmullabu@gmail.com";
-            $subject = "Contact Form Submission";
-            $body = "Name: $name\nEmail: $email\nMessage: $message";
-
-            mail($to, $subject, $body);
-
-            header("location: contact_success.php");
-            exit();
-        }
+    if (empty(trim($_POST["name"]))) {
+        $name_err = "Please enter your name.";
+    } else {
+        $name = trim($_POST["name"]);
     }
+
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "Please enter your email address.";
+    } else {
+        $email = trim($_POST["email"]);
+    }
+
+    if (empty(trim($_POST["message"]))) {
+        $message_err = "Please enter your message.";
+    } else {
+        $message = trim($_POST["message"]);
+    }
+
+    if (empty($name_err) && empty($email_err) && empty($message_err)) {
+
+        $to = "hmullabu@gmail.com";
+        $subject = "Contact Form Submission";
+        $body = "Name: $name\nEmail: $email\nMessage: $message";
+
+        mail($to, $subject, $body);
+
+        header("location: contact_success.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Me</title>
     <link rel="stylesheet" href="../style.css">
-    
+
 </head>
+
 <body>
 
-    <?php include '../nav.php'; ?>
+    <?php include $app . '/nav.php'; ?>
 
     <div class="container">
         <h2>Contact Me</h2>
@@ -75,4 +83,5 @@
     </div>
 
 </body>
+
 </html>
