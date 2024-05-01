@@ -6,12 +6,12 @@ class ProjectModel
     private $_link;
     private $_desc;
 
-    public function __construct($project)
+    public function __construct($projects)
     {
-        $this->_title = $project["title"];
-        $this->_lang = $project["Language"];
-        $this->_link = $project["link"];
-        $this->_desc = $project["Description"];
+        $this->_title = $projects["title"];
+        $this->_lang = $projects["Language"];
+        $this->_link = $projects["link"];
+        $this->_desc = $projects["Description"];
     }
 
     public function get_title()

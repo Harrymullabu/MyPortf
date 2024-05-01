@@ -1,46 +1,63 @@
 <?php
-
-$con = parse_ini_file("../config.ini", true);
-$env = $con['ENVIRONMENT'];
-$url = $con[$env]['URL_ROOT'];
-$app = $con[$env]['APP_ROOT'];
-
-
-session_start();
-
-if(!isset($_SESSION['admin'])) {
-    header('Location: index.php');
-    exit;
+// Function to parse INI file with support for multi-dimensional keys
+function parse_ini_file_multi($file, $process_sections = false, $scanner_mode = INI_SCANNER_NORMAL) {
+    $explode_str = '.';
+    $escape_char = "'";
+    // load ini file the normal way
+    $data = parse_ini_file($file, $process_sections, $scanner_mode);
+    if (!$process_sections) {
+        $data = array($data);
+    }
+    foreach ($data as $section_key => $section) {
+        // loop inside the section
+        foreach ($section as $key => $value) {
+            if (strpos($key, $explode_str)) {
+                if (substr($key, 0, 1) !== $escape_char) {
+                    
+                    $sub_keys = explode($explode_str, $key);
+                    $subs =& $data[$section_key];
+                    foreach ($sub_keys as $sub_key) {
+                        if (!isset($subs[$sub_key])) {
+                            $subs[$sub_key] = [];
+                        }
+                        $subs =& $subs[$sub_key];
+                    }
+                    // set the value at the right place
+                    $subs = $value;
+                    // unset the dotted key, we don't need it anymore
+                    unset($data[$section_key][$key]);
+                }
+                // we have escaped the key, so we keep dots as they are
+                else {
+                    $new_key = trim($key, $escape_char);
+                    $data[$section_key][$new_key] = $value;
+                    unset($data[$section_key][$key]);
+                }
+            }
+        }
+    }
+    if (!$process_sections) {
+        $data = $data[0];
+    }
+    return $data;
 }
-$projectData = [
-    'title' => 'Project Title',
-    'Language' => 'Programming Language',
-    'link' => 'https://github.com/your-project-link',
-    'projects' => 'projects.php-url',
-    'Description' => 'Project Description',
-];
-include ($app . "/ProjectModel.php");
-$project = new ProjectModel($projectData);
+
+// Load database credentials from config.ini
+$config = parse_ini_file_multi("config.ini");
+$db_config = $config['DB_NAME'];
+
+// Extract database connection parameters
+$DB_USER = $db_config['DB_USER'];
+$DB_PASS = $db_config['DB_PASS'];
+$DB_HOST = $db_config['DB_HOST'];
+$DB_NAME = $db_config['DB_NAME'];
+
+try {
+    // Establish a connection to the database using PDO
+    $conn = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
 ?>
-
-<div class="projects">
-    <h3><?php echo $project->get_title(); ?></h3>
-    <p><strong>Language:</strong> <?php echo $project->get_lang(); ?></p>
-    <p><strong>Description:</strong> <?php echo $project->get_desc(); ?></p>
-    <p><a href="<?php echo $project->get_link(); ?>">View on GitHub</a></p>
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Manage Projects</title>
-</head>
-<body>
-    <h2>Manage Projects</h2>
-    <p>Form to create/edit/delete projects goes here</p>
-    <p><a href="dashboard.php">Back to Dashboard</a></p>
-    <p><a href="logout.php">Logout</a></p>
-</body>
-</html>

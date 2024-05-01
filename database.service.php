@@ -1,70 +1,51 @@
 <?php
 
-require_once '../Project/ProjectModel.php';
+require_once '/pages/projects.php';
 
-class DatabaseService{
+class DatabaseService {
 
-    private $_posts = [
-        [
-            'id'=>1, 
-            'title' => 'Project Title',
-            'Language' => 'Programming Language',
-            'link' => 'https://github.com/-project-link',
-            'projects' => 'projects.php-url',
-            'Description' => 'Mauris ut lorem tincidunt, finibus velit in, pulvinar odio. Sed molestie eget velit aliquam vehicula. Maecenas sed finibus nisl. Donec ut ex in lorem elementum venenatis ac ut quam. Donec suscipit vulputate blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean mattis diam at tellus tincidunt, in pulvinar urna semper. Donec vehicula risus nec eros blandit, quis interdum est dapibus. Curabitur sit amet nisl auctor velit feugiat cursus sed eu libero. Nunc venenatis ullamcorper magna, eu interdum velit congue eu. Curabitur eget lorem bibendum, sollicitudin lectus et, imperdiet mi. Vivamus eget risus rhoncus, sollicitudin tortor in, sodales ligula.',
-        ],
-        [
-            'id'=>2, 
-            'title' => 'Project Title',
-            'Language' => 'Programming Language',
-            'link' => 'https://github.com/hmullabu-project-link',
-            'projects' => 'projects.php-url',
-            'Description' => 'Mauris ut lorem tincidunt, finibus velit in, pulvinar odio. Sed molestie eget velit aliquam vehicula. Maecenas sed finibus nisl. Donec ut ex in lorem elementum venenatis ac ut quam. Donec suscipit vulputate blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean mattis diam at tellus tincidunt, in pulvinar urna semper. Donec vehicula risus nec eros blandit, quis interdum est dapibus. Curabitur sit amet nisl auctor velit feugiat cursus sed eu libero. Nunc venenatis ullamcorper magna, eu interdum velit congue eu. Curabitur eget lorem bibendum, sollicitudin lectus et, imperdiet mi. Vivamus eget risus rhoncus, sollicitudin tortor in, sodales ligula.',
-        ],
-        [
-            'id'=>1, 
-            'title' => 'Project Title',
-            'Language' => 'Programming Language',
-            'link' => 'https://github.com/-project-link',
-            'projects' => 'projects.php-url',
-            'Description' => 'Mauris ut lorem tincidunt, finibus velit in, pulvinar odio. Sed molestie eget velit aliquam vehicula. Maecenas sed finibus nisl. Donec ut ex in lorem elementum venenatis ac ut quam. Donec suscipit vulputate blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean mattis diam at tellus tincidunt, in pulvinar urna semper. Donec vehicula risus nec eros blandit, quis interdum est dapibus. Curabitur sit amet nisl auctor velit feugiat cursus sed eu libero. Nunc venenatis ullamcorper magna, eu interdum velit congue eu. Curabitur eget lorem bibendum, sollicitudin lectus et, imperdiet mi. Vivamus eget risus rhoncus, sollicitudin tortor in, sodales ligula.',
-        ],
-    ];
+    private $pdo;
 
-    public function get_posts(){
-        $response = [];
-        foreach($this->_posts as $data){
-            $response[] = new ProjectModel($data);
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function get_posts() {
+        $query = "SELECT * FROM posts";
+        $stmt = $this->pdo->query($query);
+        $posts = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $posts[] = new ProjectModel($row);
         }
 
-        return $response;
+        return $posts;
     }
 
-    public function get_post_by_id($id){
-        foreach($this->_posts as $data){
-            if($data['id'] == $id){
-                return new ProjectModel($data);
-            }
+    public function get_post_by_id($id) {
+        $query = "SELECT * FROM posts WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new ProjectModel($row);
+        } else {
+            return null;
         }
-        return null;
     }
 
-    private function _get_post_index_by_id($id){
-        foreach($this->_posts as $key=>$value){
-            if($value['id'] == $id){
-                return $key;
-            }
-        }
-        return null;
+    public function submit_post($data) {
+        $query = "INSERT INTO posts (title, Language, link, projects, Description) VALUES (:title, :Language, :link, :projects, :Description)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($data);
     }
 
-    public function submit_post($data){
-       $this->_posts[] = $data;
-    }
-
-    public function edit_post($data){
-        $index = $this->_get_post_index_by_id($data['id']);
-        $this->_posts[$index] = $data;
+    public function edit_post($data) {
+        $query = "UPDATE posts SET title = :title, Language = :Language, link = :link, projects = :projects, Description = :Description WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($data);
     }
 
 }
+?>

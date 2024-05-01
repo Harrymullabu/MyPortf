@@ -2,19 +2,19 @@
 
 class Project_Controller
 {
-    private $_db;
+    private $DB_NAME;
 
     function __construct($data)
     {
-        $this->_db = $data;
+        $this->DB_NAME = $data;
     }
 
     public function render()
     {
-        foreach ($this->_db["rojects"] as $projectData) 
+        foreach ($this->DB_NAME["projects"] as $projectData) 
         {
             $project = new ProjectModel($projectData); 
-            include_once( 'pages/project.php');
+            include_once( 'pages/projects.php');
         }
     }
 }

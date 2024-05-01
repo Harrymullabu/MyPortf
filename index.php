@@ -13,7 +13,7 @@ $app = $con[$env]['APP_ROOT'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio website</title>
     <link rel="stylesheet" href="<?= $url . "/indexStyle.css" ?>">
-   
+
     <style>
         body {
             background-color: #f0f0f0;
